@@ -104,5 +104,12 @@ http://localhost:8080/api/bank/customers
 - No se necesitan imágenes ni configuraciones adicionales.
 
 ---
+## Pruebas con Postman
+
+No se pudieron adjuntar las pruebas realizadas con Postman debido a las restricciones de mi equipo institucional, que impiden la instalación y ejecución de software adicional.  
+Sin embargo, el proyecto fue probado y los endpoints funcionan correctamente según lo esperado.
+
+---
+
 ## AUTOR
 Con cariño, **Samuel Pérez.**
