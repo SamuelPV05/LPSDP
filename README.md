@@ -71,6 +71,9 @@ bank-app/
 │ timestamp : LocalDateT │
 └────────────────────────┘
 ```
+# Nota: 
+- El diagrama muestra de forma clara las relaciones entre las clases principales del sistema bancario.
+- Puede ser util para evidenciar la aplicación de **POO** (herencia, polimorfismo, composición) y facilita la comprensión, mantenimiento y extensión del proyecto.
 ---
 ## Tecnologías y Herramientas
 
