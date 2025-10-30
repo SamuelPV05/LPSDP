@@ -11,7 +11,8 @@ La aplicación expone una **API REST**, que permite interactuar con estas operac
 - Java 21  
 - Spring Boot  
 - Maven  
-- Visual Studio Code  
+- Visual Studio Code
+- Swagger (OpenAPI 3)
 - Thunder Client (para pruebas de la API)
 
 ### Requisitos
@@ -88,12 +89,154 @@ http://localhost:8080/api/bank/customers
 | Retirar dinero     | POST   | /api/bank/accounts/{id_cuenta}/withdraw?amount={monto} | Disminuye el saldo de la cuenta.        |
 | Transferir dinero  | POST   | /api/bank/accounts/{id_cuenta}/transfer          | Envía dinero a otra cuenta.                   |
 
-## Ejemplo de transferencia
+# Clientes
+
+## Endpoints
+
+- **POST** `/api/bank/customers` → Crear cliente  
+- **GET** `/api/bank/customers` → Listar clientes  
+- **GET** `/api/bank/customers/{id}` → Consultar cliente por ID  
+
+---
+
+### Ejemplo de creación de cliente (POST /api/bank/customers)
+
 ```json
 {
-  "toAccountId": "2",
+  "id": "1",
+  "name": "Juan Pérez",
+  "email": "juan@example.com"
+}
+```
+### Ejemplo de listar clientes (GET /api/bank/customers)
+```json
+  {
+    "id": "1",
+    "name": "Juan Pérez",
+    "email": "juan@example.com"
+  },
+  {
+    "id": "2",
+    "name": "María Gómez",
+    "email": "maria@example.com"
+  }
+```
+### Ejemplo de consultar cliente por ID (GET /api/bank/customers/{id})
+```json
+{
+  "id": "1",
+  "name": "Juan Pérez",
+  "email": "juan@example.com"
+}
+```
+# Cuentas
+
+## Endpoints
+
+- **POST** `/api/bank/customers/{id}/accounts` → Crear cuenta (ahorros o corriente)  
+- **GET** `/api/bank/accounts` → Listar cuentas  
+- **GET** `/api/bank/accounts/{id}` → Consultar cuenta por ID  
+
+---
+
+### Ejemplo de creación de cuenta de ahorros (POST /api/bank/customers/{id}/accounts)
+
+```json
+{
+  "type": "savings",
+  "balance": { "amount": 2000.0, "currency": "USD" },
+  "interestRate": 0.05
+}
+```
+### Ejemplo de creación de cuenta corriente (POST /api/bank/customers/{id}/accounts)
+```json
+{
+  "type": "checking",
+  "balance": { "amount": 500.0, "currency": "USD" },
+  "overdraftLimit": 200.0
+}
+```
+### Ejemplo de listado de cuentas (GET /api/bank/accounts)
+```json
+  {
+    "id": "A001",
+    "customerId": "1",
+    "type": "savings",
+    "balance": { "amount": 2000.0, "currency": "USD" },
+    "interestRate": 0.05
+  },
+  {
+    "id": "A002",
+    "customerId": "2",
+    "type": "checking",
+    "balance": { "amount": 500.0, "currency": "USD" },
+    "overdraftLimit": 200.0
+  }
+```
+### Ejemplo de consulta de cuenta por ID (GET /api/bank/accounts/{id})
+```json
+{
+  "id": "A001",
+  "customerId": "1",
+  "type": "savings",
+  "balance": { "amount": 2000.0, "currency": "USD" },
+  "interestRate": 0.05
+}
+```
+# Operaciones
+
+## Endpoints
+
+- **POST** `/api/bank/accounts/{id}/deposit?amount=X` → Depositar dinero  
+- **POST** `/api/bank/accounts/{id}/withdraw?amount=X` → Retirar dinero  
+- **POST** `/api/bank/accounts/{id}/transfer` → Transferir dinero  
+- **POST** `/api/bank/accounts/{id}/apply-interest` → Aplicar intereses (solo cuentas de ahorro)  
+- **GET** `/api/bank/accounts/{id}/transactions` → Consultar transacciones de una cuenta  
+
+---
+
+### Ejemplo de depósito (POST /api/bank/accounts/{id}/deposit?amount=X)
+
+```json
+{
+  "accountId": "A001",
+  "amount": 300
+}
+```
+### Ejemplo de retiro (POST /api/bank/accounts/{id}/withdraw?amount=X)
+```json
+{
+  "accountId": "A001",
   "amount": 150
 }
+```
+### Ejemplo de transferencia (POST /api/bank/accounts/{id}/transfer)
+```json
+{
+  "toAccountId": "A002",
+  "amount": 300
+}
+```
+### Ejemplo de aplicar intereses (POST /api/bank/accounts/{id}/apply-interest)
+```json
+{
+  "accountId": "A001"
+}
+```
+### Ejemplo de transacciones (GET /api/bank/accounts/{id}/transactions)
+```json
+  {
+    "type": "DEP",
+    "amount": { "amount": 500.0, "currency": "USD" },
+    "accountId": "A001",
+    "timestamp": "2025-10-30T12:30:45.123"
+  },
+  {
+    "type": "WDR",
+    "amount": { "amount": 200.0, "currency": "USD" },
+    "accountId": "A001",
+    "timestamp": "2025-10-30T12:35:10.456"
+  }
 ```
 ---
 ## Notas
