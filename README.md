@@ -25,6 +25,53 @@ bank-app/
 └── pom.xml
 ```
 ---
+## Diagrama de relaciones (modelo de dominio)
+```text
+                ┌───────────────────┐
+                │     Customer      │
+                │ ────────────────  │
+                │ id : String       │
+                │ name : String     │
+                │ email : String    │
+                └─────────┬─────────┘
+                          │ 1
+                          │
+                          │ *
+                ┌─────────▼─────────┐
+                │      Account      │  (abstract)
+                │ ────────────────  │
+                │ id : String       │
+                │ owner : Customer  │
+                │ balance : Money   │
+                │ transactions : [] │
+                └───────┬───┬───────┘
+                        │   │
+        ┌───────────────┘   └───────────────┐
+        │                                   │
+┌───────▼──────────┐               ┌────────▼─────────┐
+│  SavingsAccount  │               │ CheckingAccount  │
+│ ───────────────  │               │ ───────────────  │
+│ interestRate: d. │               │ overdraftLimit:d │
+│ applyInterest()  │               │ withdraw()       │
+└──────────────────┘               └──────────────────┘
+
+┌───────────────────┐
+│      Money        │
+│ ────────────────  │
+│ amount : double   │
+│ currency : String │
+└───────────────────┘
+
+┌────────────────────────┐
+│      Transaction       │
+│ ─────────────────────  │
+│ type : String          │
+│ amount : Money         │
+│ accountId : String     │
+│ timestamp : LocalDateT │
+└────────────────────────┘
+```
+---
 ## Tecnologías y Herramientas
 
 - Java 21  
