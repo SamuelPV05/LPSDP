@@ -5,7 +5,26 @@ Su objetivo es simular operaciones bancarias como creación de clientes, apertur
 La aplicación expone una **API REST**, que permite interactuar con estas operaciones mediante solicitudes HTTP.
 
 ---
-
+## Estructura
+```text
+bank-app/
+├── src/
+│   ├── main/java/com/appbank/
+│   │   ├── app/           # Clase principal
+│   │   ├── model/         # Entidades (Customer, Account, Money, Transaction)
+│   │   ├── service/       # Lógica de negocio
+│   │   ├── repository/    # Persistencia en JSON
+│   │   ├── controller/    # Endpoints REST
+│   │   ├── exception/     # Excepciones personalizadas
+│   │   └── config/        # Configuración Swagger
+│   └── resources/
+│       ├── application.properties
+│       └── data/
+│           ├── customers.json
+│           └── accounts.json
+└── pom.xml
+```
+---
 ## Tecnologías y Herramientas
 
 - Java 21  
