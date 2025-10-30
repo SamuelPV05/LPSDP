@@ -239,18 +239,67 @@ http://localhost:8080/api/bank/customers
   }
 ```
 ---
+---
+
+## Documentación con Swagger
+
+La API está documentada con **Swagger/OpenAPI**, lo que permite:
+
+- Visualizar todos los endpoints disponibles.
+- Probar las operaciones directamente desde el navegador, sin necesidad de Postman o Thunder Client.
+- Generar automáticamente la especificación OpenAPI en formato JSON.  
+
+### Acceso a Swagger UI
+
+Una vez levantada la aplicación, puedes acceder a la documentación en:
+
+- **Swagger UI**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)  
+- **OpenAPI JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)  
+
+### Ejemplo de fragmento del JSON generado
+
+```json
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Application Bank",
+    "version": "1.0.0",
+    "description": "API REST para operaciones bancarias"
+  }
+}
+```
+### Endpoints documentados
+
+Algunos de los endpoints disponibles en Swagger:
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST   | `/api/bank/customers` | Crear cliente |
+| GET    | `/api/bank/customers` | Listar clientes |
+| GET    | `/api/bank/customers/{id}` | Consultar cliente por ID |
+| POST   | `/api/bank/customers/{id}/accounts` | Crear cuenta (ahorros o corriente) |
+| GET    | `/api/bank/accounts` | Listar cuentas |
+| GET    | `/api/bank/accounts/{id}` | Consultar cuenta por ID |
+| POST   | `/api/bank/accounts/{id}/deposit?amount=X` | Depositar dinero |
+| POST   | `/api/bank/accounts/{id}/withdraw?amount=X` | Retirar dinero |
+| POST   | `/api/bank/accounts/{id}/transfer` | Transferir dinero |
+| POST   | `/api/bank/accounts/{id}/apply-interest` | Aplicar intereses (solo cuentas de ahorro) |
+| GET    | `/api/bank/accounts/{id}/transactions` | Consultar transacciones |
+
+---
 ## Notas
 
 - La aplicación utiliza el puerto 8080 por defecto.
+- Aunque no se incluyan imágenes de Swagger, esta sección permite a cualquier usuario del repositorio saber que la API está documentada y lista para pruebas.
 - Puedes usar Thunder Client, Postman u otro cliente REST para probar los endpoints.
 - Si realizas cambios en el código, reinicia el servidor para que se apliquen.
 - No se necesitan imágenes ni configuraciones adicionales.
 
 ---
-## Pruebas con Postman
-
-No se pudieron adjuntar las pruebas realizadas con Postman debido a las restricciones de mi equipo institucional, que impiden la instalación y ejecución de software adicional.  
-Sin embargo, el proyecto fue probado y los endpoints funcionan correctamente según lo esperado.
+## Pruebas...
+- No se pudieron adjuntar las pruebas realizadas con Postman debido a las restricciones de mi equipo institucional, que impiden la instalación y ejecución de software adicional.
+- Debido a cambios constantes de equipo durante el desarrollo, no fue posible capturar todas las imágenes de pruebas ni ejecutar todos los endpoints en un mismo entorno.
+Sin embargo, el proyecto y los endpoints funcionan correctamente según lo esperado.
 
 ---
 
